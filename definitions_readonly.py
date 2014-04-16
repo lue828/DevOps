@@ -17,10 +17,10 @@ class Application(tornado.web.Application):
         conn = pymongo.Connection("127.0.0.1", 27017)
         self.db = conn["test"]
         settings = dict(
-            template_path=os.path.join(os.path.dirname(__file__), "templates"),
-            static_path=os.path.join(os.path.dirname(__file__), "static"),
-            xsrf_cookies=True,
-            cookie_secret="__TODO:_GENERATE_YOUR_OWN_RANDOM_VALUE_HERE__",
+            #template_path=os.path.join(os.path.dirname(__file__), "templates"),
+            #static_path=os.path.join(os.path.dirname(__file__), "static"),
+            #xsrf_cookies=True,
+            #cookie_secret="__TODO:_GENERATE_YOUR_OWN_RANDOM_VALUE_HERE__",
             debug=True,
         )
         tornado.web.Application.__init__(self, handlers, **settings)
@@ -35,6 +35,19 @@ class WordHandler(tornado.web.RequestHandler):
         else:
             self.set_status(404)
             self.write({"error", "word not found"})
+
+    def post(self, word):
+        definition = self.get_argument("definition")
+        coll = self.application.db.words
+        word_doc = coll.find_one({"word": word})
+        if word_doc:
+            word_doc['definition'] = definition
+            coll.insert(word_doc)
+        else:
+            word_doc = {'word': word, 'definition': definition}
+            coll.insert(word_doc)
+        del word_doc["_id"]
+        self.write(word_doc)
 
 if __name__ == "__main__":
     tornado.options.parse_command_line()
