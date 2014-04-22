@@ -5,6 +5,7 @@ import tornado.options
 import tornado.web
 
 import pymongo
+import json
 
 from tornado.options import define, options
 define("port", default=80, help="run on the given port", type=int)
@@ -35,7 +36,8 @@ class WordHandler(tornado.web.RequestHandler):
             self.write(result)
         else:
             self.set_status(404)
-            self.write({"error", "word not found"})
+            self.write(json.dumps({"error": "word not found"}))
+            #self.write("error,word not found")
 
     def post(self, word):
         definition = self.get_argument("definition")
