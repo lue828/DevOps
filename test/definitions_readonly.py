@@ -31,7 +31,8 @@ class WordHandler(tornado.web.RequestHandler):
         word_doc = coll.find_one({"word": word})
         if word_doc:
             del word_doc["_id"]
-            self.write(word_doc)
+            result = tornado.escape.json_encode(word_doc)
+            self.write(result)
         else:
             self.set_status(404)
             self.write({"error", "word not found"})
@@ -47,7 +48,8 @@ class WordHandler(tornado.web.RequestHandler):
             word_doc = {'word': word, 'definition': definition}
             coll.insert(word_doc)
         del word_doc["_id"]
-        self.write(word_doc)
+        result = tornado.escape.json_encode(word_doc)
+        self.write(result)
 
 if __name__ == "__main__":
     tornado.options.parse_command_line()
