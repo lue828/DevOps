@@ -31,7 +31,7 @@ class Application(tornado.web.Application):
 
 class Salt(tornado.web.RequestHandler):
     def get(self):
-        self.render('salt_ui.html',title='SaltStack',result='l')
+        self.render('salt_ui.html',title='SaltStack',result=[])
 
     def post(self):
         print(self.request.remote_ip)
