@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import os
 import tornado.httpserver
 import tornado.ioloop
@@ -6,6 +8,7 @@ import tornado.web
 
 import pymongo
 import json
+import salt
 
 from tornado.options import define, options
 define("port", default=80, help="run on the given port", type=int)
