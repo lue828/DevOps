@@ -13,7 +13,7 @@ define("port", default=80, help="run on the given port", type=int)
 class Application(tornado.web.Application):
     def __init__(self):
         handlers = [
-            (r"/(\w+)", WordHandler),
+            (r"/", Salt),
         ]
         #conn = pymongo.Connection("127.0.0.1", 27017)
         #self.db = conn["test"]
@@ -26,7 +26,7 @@ class Application(tornado.web.Application):
         )
         tornado.web.Application.__init__(self, handlers, **settings)
 
-class WordHandler(tornado.web.RequestHandler):
+class Salt(tornado.web.RequestHandler):
     def get(self):
         self.render('salt_ui.html',title='SaltStack',result=l)
 
