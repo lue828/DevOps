@@ -113,6 +113,44 @@
     </div>
 </div>
                 <!-- index left end  -->
+        <!-- index right -->
+        <div class="col-md-10 column">
+    <div class="tabbable" id="tabs-60113">
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a href="#panel-469468" data-toggle="tab">Section 1</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="panel-469468">
+                <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3" style="margin-top: 40px;">
+                        <form class="form-inline" role="form" action="/" method="post">
+                        <div class="form-group">
+                            <label class="sr-only" for="hostname">Hostname</label>
+                            <input type="text" name="hostname" class="form-control" id="hostname" placeholder="hostname">
+                        </div>
+                        <div class="form-group">
+                            <label class="sr-only" for="command">Command</label>
+                            <input type="text" name="command" class="form-control" id="command" placeholder="command">
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                        </form>
+                        <ul>
+                            {% autoescape %}
+                            {% for k in result %}
+                            {{ result[k].replace('\n', '<br>') }}
+                            {% end %}
+                        </ul>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+                <!-- index right end -->
     </div>
     </div>
   </body>
