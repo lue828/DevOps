@@ -39,7 +39,7 @@ class Salt(tornado.web.RequestHandler):
         hostname=self.get_argument('hostname')
         command=self.get_argument('command')
         client = salt.client.LocalClient()
-        results = client.cmd(hostname, 'cmd.run', command)
+        results = client.cmd(hostname, 'cmd.run', [command])
         self.render('salt_ui.html', title='SaltStack', result=results)
         #self.render('salt_ui.html',title='SaltStack', **results)
 
