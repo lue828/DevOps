@@ -23,7 +23,7 @@ class Application(tornado.web.Application):
         settings = dict(
             template_path=os.path.join(os.path.dirname(__file__), "templates"),
             static_path=os.path.join(os.path.dirname(__file__), "static"),
-            xsrf_cookies=True,
+            xsrf_cookies=False,
             cookie_secret="__TODO:_GENERATE_YOUR_OWN_RANDOM_VALUE_HERE__",
             debug=True,
         )
@@ -40,7 +40,7 @@ class Salt(tornado.web.RequestHandler):
         command=self.get_argument('command')
         client = salt.client.LocalClient()
         results = client.cmd(hostname, 'cmd.run', command)
-        self.render('salt_ui.html',title='SaltStack', resutl=results)
+        self.render('salt_ui.html',title='SaltStack', result=results)
         #self.render('salt_ui.html',title='SaltStack', **results)
 
 if __name__ == "__main__":
