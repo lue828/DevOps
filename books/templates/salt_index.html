@@ -139,7 +139,7 @@
                         <ul>
                             {% autoescape %}
                             {% for k in result %}
-                            {{ result[k].replace('\n', '<br>') }}
+                            <li>{{ result[k].replace('\n', '<br>') }}</li>
                             {% end %}
                         </ul>
                     </div>
