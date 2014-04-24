@@ -31,9 +31,9 @@
             </div>
             <div class="row">
                 <ul>
-                    {%for r in results.keys%}
-                    <li>{{escape(result[r])}}</li>
-                    {%end%}
+                    {% for k in result %}
+                    {{ result[k].replace('\n', '<br />') }}
+                    {% end %}
                 </ul>
             </div>
         </div>
