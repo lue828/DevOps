@@ -32,7 +32,7 @@ class Application(tornado.web.Application):
 class Salt(tornado.web.RequestHandler):
     def get(self):
         results = {}
-        self.render('salt_ui.html', title='SaltStack', result=results)
+        self.render('salt_index.html', title='SaltStack', result=results)
 
     def post(self):
         print(self.request.remote_ip)
@@ -40,7 +40,7 @@ class Salt(tornado.web.RequestHandler):
         command=self.get_argument('command')
         client = salt.client.LocalClient()
         results = client.cmd(hostname, 'cmd.run', command)
-        self.render('salt_ui.html', title='SaltStack', result=results)
+        self.render('salt_index.html', title='SaltStack', result=results)
         #self.render('salt_ui.html',title='SaltStack', **results)
 
 if __name__ == "__main__":
