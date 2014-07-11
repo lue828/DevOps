@@ -11,7 +11,7 @@ import json
 import salt
 
 from tornado.options import define, options
-define("port", default=6666, help="run on the given port", type=int)
+define("port", default=80, help="run on the given port", type=int)
 
 class Application(tornado.web.Application):
     def __init__(self):
@@ -39,7 +39,7 @@ class Salt(tornado.web.RequestHandler):
         hostname=self.get_argument('hostname')
         command=self.get_argument('command')
         client = salt.client.LocalClient()
-        results = client.cmd(hostname, 'cmd.run', command)
+        results = client.cmd(hostname, 'cmd.run', [command])
         self.render('salt_index.html', title='SaltStack', result=results)
         #self.render('salt_ui.html',title='SaltStack', **results)
 
